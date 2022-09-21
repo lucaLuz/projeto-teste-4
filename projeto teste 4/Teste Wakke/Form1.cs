@@ -23,13 +23,9 @@ namespace Teste_Wakke
         private void button3_Click(object sender, EventArgs e)
         {
             Banco banco = new Banco();
+            Usuario usuario = new Usuario();
 
-            List<Usuario> list_u = new List<Usuario>();
-
-            foreach (Usuario v in list_u)
-            {
-                dt_formulario.Rows.RemoveAt(v.Txdcid[0]);
-            }
+            banco.Delete(usuario);
         }
 
         private void btn_cadastro_Click(object sender, EventArgs e)
@@ -62,11 +58,10 @@ namespace Teste_Wakke
             }
         }
 
-
-
         public void delete_grid()
         {
-
+            var id = Convert.ToInt32(dt_formulario.Rows[dt_formulario.CurrentCell.RowIndex].Index);
+            frm_inicio inicio = new frm_inicio();
         }
         /*public void delete_grid()
         {
@@ -79,6 +74,14 @@ namespace Teste_Wakke
             while (lista_u.Count > 0)
             {
                 dt_formulario.Rows.RemoveAt(lista_u.Count - 1);
+            }
+
+                    List<Usuario> list_u = new List<Usuario>();
+
+            foreach (Usuario v in list_u)
+            {
+                var id = Convert.ToInt32(dt_formulario.Rows[dt_formulario.CurrentCell.RowIndex].Index);
+                dt_formulario.Rows.RemoveAt(id);
             }
         }*/
 

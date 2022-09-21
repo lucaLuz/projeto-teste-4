@@ -78,7 +78,6 @@ namespace Teste_Wakke.Models
             {
                 var data = u.Txtdata.Split('/');
                 cmd.CommandText = $"INSERT INTO usuario( ativo, nome, sobrenome, datanascimento, altura) values ( {int.Parse(u.Rbativo)}, '{u.Txtnome}', '{u.Txtsobrenome}', '{data[2]}{data[1]}{data[0]}',{decimal.Parse(u.Txtaltura).ToString("N2").Replace(",",".")})";
-
                 cmd.ExecuteNonQuery();
 
             }
@@ -90,7 +89,7 @@ namespace Teste_Wakke.Models
 
         }
 
-        public void Update()
+        public void Update(Usuario u)
         {
             var con = new SQLiteConnection(cs);
             con.Open();
@@ -99,17 +98,8 @@ namespace Teste_Wakke.Models
 
             try
             {
-                Usuario cadastro = new Usuario();
-
-                cmd.CommandText = "UPDATE usuario SET ativo=@ativo, nome=@nome, sobrenome=@sobrenome, data de nascimento=@data de nascimento, altura=@altura WHERE ID =@ID";
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@ID", cadastro.Txdcid);
-                cmd.Parameters.AddWithValue("@ativo", cadastro.Rbativo);
-                cmd.Parameters.AddWithValue("@nome", cadastro.Txtnome);
-                cmd.Parameters.AddWithValue("@sobrenome", cadastro.Txtsobrenome);
-                cmd.Parameters.AddWithValue("@data de nascimento", cadastro.Txtdata);
-                cmd.Parameters.AddWithValue("@altura", cadastro.Txtaltura);
-
+                var data = u.Txtdata.Split('/');
+                cmd.CommandText = $"UPDATE usuario SET ativo='{int.Parse(u.Rbativo)}', nome='{u.Txtnome}', sobrenome='{u.Txtsobrenome}', datanascimento='{data[2]}{data[1]}{data[0]}', altura={decimal.Parse(u.Txtaltura).ToString("N2").Replace(",", ".")}";
                 cmd.ExecuteNonQuery();
 
             }
@@ -121,23 +111,18 @@ namespace Teste_Wakke.Models
         }
 
 
-        public void delete(Usuario u)
+        public void Delete(Usuario u)
         {
             var con = new SQLiteConnection(cs);
             con.Open();
 
             var cmd = new SQLiteCommand(con);
 
+
             try
             {
-                cmd.CommandText = "DELETE FROM usuario WHERE ID=ID, ativo=@ativo, nome=@nome, sobrenome=@sobrenome, data de nascimento=@data de nascimento, altura=@altura";
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@ID", u.Txdcid);
-                cmd.Parameters.AddWithValue("@ativo", u.Rbativo);
-                cmd.Parameters.AddWithValue("@nome", u.Txtnome);
-                cmd.Parameters.AddWithValue("@sobrenome", u.Txtsobrenome);
-                cmd.Parameters.AddWithValue("@data de nascimento", u.Txtdata);
-                cmd.Parameters.AddWithValue("@altura", u.Txtaltura);
+                var data = u.Txtdata.Split('/');
+                cmd.CommandText = $"DELETE FROM usuario ID='{u.Txdcid}', ativo='{int.Parse(u.Rbativo)}', nome='{u.Txtnome}', sobrenome='{u.Txtsobrenome}', datanascimento='{data[2]}{data[1]}{data[0]}', altura={decimal.Parse(u.Txtaltura).ToString("N2").Replace(",", ".")}";
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
