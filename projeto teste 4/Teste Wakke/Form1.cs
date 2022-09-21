@@ -40,6 +40,7 @@ namespace Teste_Wakke
         {
             frm_cadastro cadastro = new frm_cadastro();
             cadastro.ShowDialog();
+            update_grid();
         }
 
         private void Lbl_titulo_Click(object sender, EventArgs e)
@@ -62,6 +63,18 @@ namespace Teste_Wakke
         {
             var id = Convert.ToInt32(dt_formulario.Rows[dt_formulario.CurrentCell.RowIndex].Index);
             frm_inicio inicio = new frm_inicio();
+        }
+
+        public void update_grid()
+        {
+            Usuario usuario = new Usuario();
+            Banco banco = new Banco();
+            usuario.Rbativo = Convert.ToString(cl_ativo);
+            usuario.Txtnome =  Convert.ToString(cl_nome);
+            usuario.Txtsobrenome = Convert.ToString(cl_sobrenome);
+            usuario.Txtdata = Convert.ToString(cl_data);
+            usuario.Txtaltura = Convert.ToString(cl_altura);
+            banco.Update(usuario);
         }
         /*public void delete_grid()
         {
